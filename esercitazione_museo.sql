@@ -35,7 +35,7 @@ create table categoria
     id                 int auto_increment,
     descrizione        varchar(255),
     tipo_documento     varchar(255) NOT NULL,
-    percentuale_sconto float       NOT NULL,
+    percentuale_sconto float        NOT NULL,
     primary key (id)
 );
 create table biglietto
@@ -87,6 +87,14 @@ create table pagamento
     primary key (id_transazione)
 );
 
+create table associazione
+(
+    numero              int,
+    articolo_aggiuntivo int,
+    primary key (numero, articolo_aggiuntivo),
+    foreign key (numero) references biglietto (numero),
+    foreign key (articolo_aggiuntivo) references articolo_aggiuntivo (id)
+);
 
 create table acquisto
 (
