@@ -81,7 +81,7 @@ create table utente
 create table pagamento
 (
     id_transazione varchar(255),
-    importo        decimal(10, 2) NOT NULL,
+    importo_totale        decimal(10, 2) NOT NULL,
     data           datetime default NOW(),
     primary key (id_transazione)
 );
@@ -100,6 +100,7 @@ create table acquisto
     utente    varchar(320),
     pagamento varchar(255),
     biglietto int,
+    importo_pagato DEC(10,2),
     primary key (utente, pagamento, biglietto),
     foreign key (utente) references utente (email) on update cascade,
     foreign key (pagamento) references pagamento (id_transazione) on update cascade,
@@ -109,65 +110,65 @@ create table acquisto
 
 ## INSERT
 ## INSERT
-insert into evento ( titolo, data_inizio, data_fine, numero_biglietti, tariffa, tipo)
+insert into evento (titolo, data_inizio, data_fine, numero_biglietti, tariffa, tipo)
 values ('Stravaganza degli anni 80', '2021-01-14', '2021-05-21', 200, 10.5, 'VISITA'),
-	   ('Le avanguardie', '2021-03-21', '2021-08-26', 250, 13.5, 'VISITA'),
-	   ('L\'evoluzione del menswear', '2020-09-06', '2021-01-15', 175, 12.5, 'VISITA'),
-	   ('100 icone', '2020-08-14', '2021-02-25', 300, 15, 'ESPOSIZIONE'),
-	   ('Martin Margiela - un rivoluzionario', '2020-11-24', '2021-04-25', 200, 12.5, 'ESPOSIZIONE'),
-	   ('Le influenze dell\'Hip Hop', '2020-11-07', '2021-05-23', 200, 10.5, 'VISITA'),
-	   ('Una sfilata nel passato', '2020-03-24', '2020-09-05', 250, 13, 'ESPOSIZIONE');
+       ('Le avanguardie', '2021-03-21', '2021-08-26', 250, 13.5, 'VISITA'),
+       ('L\'evoluzione del menswear', '2020-09-06', '2021-01-15', 175, 12.5, 'VISITA'),
+       ('100 icone', '2020-08-14', '2021-02-25', 300, 15, 'ESPOSIZIONE'),
+       ('Martin Margiela - un rivoluzionario', '2020-11-24', '2021-04-25', 200, 12.5, 'ESPOSIZIONE'),
+       ('Le influenze dell\'Hip Hop', '2020-11-07', '2021-05-23', 200, 10.5, 'VISITA'),
+       ('Una sfilata nel passato', '2020-03-24', '2020-09-05', 250, 13, 'ESPOSIZIONE');
 
 
 insert into categoria (descrizione, tipo_documento, percentuale_sconto)
 values ('Bambino (-12)', 'Carta Identità', 20),
-	   ('Anziano (+65)', 'Carta Identità', 25),
-	   ('Studente', 'Carta Universitaria', 15);
+       ('Anziano (+65)', 'Carta Identità', 25),
+       ('Studente', 'Carta Universitaria', 15);
 
 
 insert into biglietto (data_validita, categoria, evento)
 values ('2021-04-23', 2, 1),
-	   ('2021-06-14', 3, 2),
-	   ('2021-01-15', 3, 4),
-	   ('2021-02-16', 2, 5),
-	   ('2020-11-21', 2, 3),
-	   ('2021-02-23', 3, 6),
-	   ('2020-05-12', NULL, 7),
-	   ('2021-06-09', NULL, 2),
-	   ('2021-06-09', 1, 2),
-	   ('2021-01-23', 2, 4),
-	   ('2021-02-14', NULL, 5),
-	   ('2021-03-17', NULL, 1),
-	   ('2021-03-17', 1, 1),
-	   ('2021-03-17', 2, 1),
-	   ('2020-12-16', NULL, 3),
-	   ('2020-12-16', NULL, 3);
+       ('2021-06-14', 3, 2),
+       ('2021-01-15', 3, 4),
+       ('2021-02-16', 2, 5),
+       ('2020-11-21', 2, 3),
+       ('2021-02-23', 3, 6),
+       ('2020-05-12', NULL, 7),
+       ('2021-06-09', NULL, 2),
+       ('2021-06-09', 1, 2),
+       ('2021-01-23', 2, 4),
+       ('2021-02-14', NULL, 5),
+       ('2021-03-17', NULL, 1),
+       ('2021-03-17', 1, 1),
+       ('2021-03-17', 2, 1),
+       ('2020-12-16', NULL, 3),
+       ('2020-12-16', NULL, 3);
 
 
 insert into articolo_aggiuntivo (costo, descrizione, tipo)
 values (30, 'Cappello New Era Logo', 'ACCESSORIO'),
-	   (7.5, 'Tote Bag', 'ACCESSORIO'),
-	   (24, 'Maglietta Logo', 'ACCESSORIO'),
-	   (15, 'Tazza Since 1993', 'ACCESSORIO'),
-	   (75, 'Maglia x Comme de Garcons', 'ACCESSORIO'),
-	   (30, 'Visita Guidata', 'SERVIZIO'),
-	   (10, 'Visita Guidata Cuffia', 'SERVIZIO'),
-	   (12, 'Visita Guidata Cuffia Multilingua', 'SERVIZIO');
+       (7.5, 'Tote Bag', 'ACCESSORIO'),
+       (24, 'Maglietta Logo', 'ACCESSORIO'),
+       (15, 'Tazza Since 1993', 'ACCESSORIO'),
+       (75, 'Maglia x Comme de Garcons', 'ACCESSORIO'),
+       (30, 'Visita Guidata', 'SERVIZIO'),
+       (10, 'Visita Guidata Cuffia', 'SERVIZIO'),
+       (12, 'Visita Guidata Cuffia Multilingua', 'SERVIZIO');
 
 
 insert into associazione (numero, articolo_aggiuntivo)
 values (1, 1),
-	   (3, 2),
-	   (9, 6),
-	   (5, 3),
-	   (5, 1),
-	   (2, 8),
-	   (2, 1),
-	   (6, 5),
-	   (7, 7),
-	   (4, 1),
-	   (4, 5),
-	   (4, 2);
+       (3, 2),
+       (9, 6),
+       (5, 3),
+       (5, 1),
+       (2, 8),
+       (2, 1),
+       (6, 5),
+       (7, 7),
+       (4, 1),
+       (4, 5),
+       (4, 2);
 
 
 insert into utente (email, password, nome, cognome, telefono, via, cap, numero_civico, citta, sigla_provincia)
@@ -195,7 +196,7 @@ values ('nico53@example.org', '$2b$12$02dW.34ymSC2cfDydkrYre4J6WwvdolQQCGvWn5qqD
         '+3978926297', 'Marco Polo', '14897', '2', 'Cissone', 'CN');
 
 
-insert into pagamento (id_transazione, importo,data)
+insert into pagamento (id_transazione, importo, data)
 values ('df47973f-8cb7-11eb-95a6-c8b29b8908ae', 73.72, '2020-11-18 16:15:48'),
        ('df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 37.87, '2021-02-15 15:33:05'),
        ('df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 122.25, '2021-01-14 12:23:56'),
@@ -211,21 +212,21 @@ values ('df47973f-8cb7-11eb-95a6-c8b29b8908ae', 73.72, '2020-11-18 16:15:48'),
 
 insert into acquisto (utente, pagamento, biglietto)
 values ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 2),
-	   ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 3),
-	   ('matteotticesare@example.net', 'df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 1),
-	   ('guido38@example.com', 'df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 4),
-	   ('ottaviobresciani@example.com', 'df47e5a9-8cb7-11eb-87b9-c8b29b8908ae', 5),
-	   ('ezito@example.net', 'df47e5aa-8cb7-11eb-a543-c8b29b8908ae', 6),
-	   ('tbriccialdi@example.com', 'df47e5ab-8cb7-11eb-b2e8-c8b29b8908ae', 7),
-	   ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 8),
-	   ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 9),
-	   ('antonina84@example.org', 'df47e5ad-8cb7-11eb-82cf-c8b29b8908ae', 10),
-	   ('fornaciaricristina@example.com', 'df480c02-8cb7-11eb-9975-c8b29b8908ae', 11),
-	   ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 12),
-	   ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 13),
-	   ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 14),
-	   ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 15),
-	   ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 16);
+       ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 3),
+       ('matteotticesare@example.net', 'df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 1),
+       ('guido38@example.com', 'df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 4),
+       ('ottaviobresciani@example.com', 'df47e5a9-8cb7-11eb-87b9-c8b29b8908ae', 5),
+       ('ezito@example.net', 'df47e5aa-8cb7-11eb-a543-c8b29b8908ae', 6),
+       ('tbriccialdi@example.com', 'df47e5ab-8cb7-11eb-b2e8-c8b29b8908ae', 7),
+       ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 8),
+       ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 9),
+       ('antonina84@example.org', 'df47e5ad-8cb7-11eb-82cf-c8b29b8908ae', 10),
+       ('fornaciaricristina@example.com', 'df480c02-8cb7-11eb-9975-c8b29b8908ae', 11),
+       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 12),
+       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 13),
+       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 14),
+       ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 15),
+       ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 16);
 
 
 # I titoli e le date delle esposizioni tematiche che sono state tenute dal 1 gennaio al 31 dicembre di un determinato anno.
@@ -238,23 +239,26 @@ where tipo = 'ESPOSIZIONE'
 
 # Numero di biglietti emessi (venduti) per una determinata esposizione
 
-select count(b.numero)
+select count(b.numero) as 'Biglietti venduti per 100 icone'
 from evento as e,
      biglietto as b,
      acquisto as a
-where e.titolo = "titolo evento"
+where e.titolo = '100 icone'
+  and e.tipo = 'ESPOSIZIONE'
   and b.evento = e.id
   and a.biglietto = b.numero;
 
 # Ricavato della vendita dei biglietti per una determinata esposizione
 
-select sum(p.importo)
+select *
 from evento as e,
      biglietto as b,
      acquisto as a,
      pagamento as p
-where e.titolo = 'NOME EVENTO'
+where e.titolo = '100 icone'
   and e.tipo = 'ESPOSIZIONE'
   and b.evento = e.id
   and a.biglietto = b.numero
   and p.id_transazione = a.pagamento;
+
+# numero di biglietti venduti * tariffa dell'evento -> non prende inconsiderazione gli sconti
