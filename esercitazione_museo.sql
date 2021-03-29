@@ -196,7 +196,7 @@ values ('nico53@example.org', '$2b$12$02dW.34ymSC2cfDydkrYre4J6WwvdolQQCGvWn5qqD
         '+3978926297', 'Marco Polo', '14897', '2', 'Cissone', 'CN');
 
 
-insert into pagamento (id_transazione, importo, data)
+insert into pagamento (id_transazione, importo_totale, data)
 values ('df47973f-8cb7-11eb-95a6-c8b29b8908ae', 73.72, '2020-11-18 16:15:48'),
        ('df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 37.87, '2021-02-15 15:33:05'),
        ('df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 122.25, '2021-01-14 12:23:56'),
@@ -210,55 +210,20 @@ values ('df47973f-8cb7-11eb-95a6-c8b29b8908ae', 73.72, '2020-11-18 16:15:48'),
        ('df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 25, '2020-11-23 09:00:31');
 
 
-insert into acquisto (utente, pagamento, biglietto)
-values ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 2),
-       ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 3),
-       ('matteotticesare@example.net', 'df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 1),
-       ('guido38@example.com', 'df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 4),
-       ('ottaviobresciani@example.com', 'df47e5a9-8cb7-11eb-87b9-c8b29b8908ae', 5),
-       ('ezito@example.net', 'df47e5aa-8cb7-11eb-a543-c8b29b8908ae', 6),
-       ('tbriccialdi@example.com', 'df47e5ab-8cb7-11eb-b2e8-c8b29b8908ae', 7),
-       ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 8),
-       ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 9),
-       ('antonina84@example.org', 'df47e5ad-8cb7-11eb-82cf-c8b29b8908ae', 10),
-       ('fornaciaricristina@example.com', 'df480c02-8cb7-11eb-9975-c8b29b8908ae', 11),
-       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 12),
-       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 13),
-       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 14),
-       ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 15),
-       ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 16);
-
-
-# I titoli e le date delle esposizioni tematiche che sono state tenute dal 1 gennaio al 31 dicembre di un determinato anno.
-
-select titolo, data_inizio, data_fine
-from evento
-where tipo = 'ESPOSIZIONE'
-  and year(evento.data_inizio) = 2020
-  and year(evento.data_fine) = 2020;
-
-# Numero di biglietti emessi (venduti) per una determinata esposizione
-
-select count(b.numero) as 'Biglietti venduti per 100 icone'
-from evento as e,
-     biglietto as b,
-     acquisto as a
-where e.titolo = '100 icone'
-  and e.tipo = 'ESPOSIZIONE'
-  and b.evento = e.id
-  and a.biglietto = b.numero;
-
-# Ricavato della vendita dei biglietti per una determinata esposizione
-
-select *
-from evento as e,
-     biglietto as b,
-     acquisto as a,
-     pagamento as p
-where e.titolo = '100 icone'
-  and e.tipo = 'ESPOSIZIONE'
-  and b.evento = e.id
-  and a.biglietto = b.numero
-  and p.id_transazione = a.pagamento;
-
-# numero di biglietti venduti * tariffa dell'evento -> non prende inconsiderazione gli sconti
+insert into acquisto (utente, pagamento, biglietto, importo_pagato)
+values ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 2, 53.47),
+       ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 3, 20.25),
+       ('matteotticesare@example.net', 'df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 1, 37.87),
+       ('guido38@example.com', 'df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 4, 121.87),
+       ('ottaviobresciani@example.com', 'df47e5a9-8cb7-11eb-87b9-c8b29b8908ae', 5, 63.37),
+       ('ezito@example.net', 'df47e5aa-8cb7-11eb-a543-c8b29b8908ae', 6, 83.92),
+       ('tbriccialdi@example.com', 'df47e5ab-8cb7-11eb-b2e8-c8b29b8908ae', 7, 23),
+       ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 8, 13.5),
+       ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 9, 40.8),
+       ('antonina84@example.org', 'df47e5ad-8cb7-11eb-82cf-c8b29b8908ae', 10, 11.25),
+       ('fornaciaricristina@example.com', 'df480c02-8cb7-11eb-9975-c8b29b8908ae', 11, 12.5),
+       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 12, 10.5),
+       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 13, 8.4),
+       ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 14, 7.87),
+       ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 15, 12.5),
+       ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 16, 12.5);
