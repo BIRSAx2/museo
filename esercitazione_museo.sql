@@ -142,3 +142,36 @@ values ('df47973f-8cb7-11eb-95a6-c8b29b8908ae', 1.5, '2020-01-18 16:15:48'),
        ('df47e5ad-8cb7-11eb-82cf-c8b29b8908ae', 1.83, '2020-09-13 04:50:19'),
        ('df480c02-8cb7-11eb-9975-c8b29b8908ae', 1.55, '2020-11-24 04:34:28'),
        ('df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 1.86, '2020-11-23 09:00:31');
+                                   
+                                   
+                                   
+# I titoli e le date delle esposizioni tematiche che sono state tenute dal 1 gennaio al 31 dicembre di un determinato anno.
+
+select titolo, data_inizio, data_fine
+from evento
+where tipo = 'ESPOSIZIONE'
+  and year(evento.data_inizio) = 2020
+  and year(evento.data_fine) = 2020;
+
+# Numero di biglietti emessi (venduti) per una determinata esposizione
+
+select count(b.numero)
+from evento as e,
+     biglietto as b,
+     acquisto as a
+where e.titolo = "titolo evento"
+  and b.evento = e.id
+  and a.biglietto = b.numero;
+
+# Ricavato della vendita dei biglietti per una determinata esposizione
+
+select sum(p.importo)
+from evento as e,
+     biglietto as b,
+     acquisto as a,
+     pagamento as p
+where e.titolo = 'NOME EVENTO'
+  and e.tipo = 'ESPOSIZIONE'
+  and b.evento = e.id
+  and a.biglietto = b.numero
+  and p.id_transazione = a.pagamento;
