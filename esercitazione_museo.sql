@@ -81,7 +81,7 @@ create table utente
 create table pagamento
 (
     id_transazione varchar(255),
-    importo_totale        decimal(10, 2) NOT NULL,
+    importo_totale decimal(10, 2) NOT NULL,
     data           datetime default NOW(),
     primary key (id_transazione)
 );
@@ -97,10 +97,10 @@ create table associazione
 
 create table acquisto
 (
-    utente    varchar(320),
-    pagamento varchar(255),
-    biglietto int,
-    importo_pagato DEC(10,2),
+    utente         varchar(320),
+    pagamento      varchar(255),
+    biglietto      int,
+    importo_pagato DEC(10, 2),
     primary key (utente, pagamento, biglietto),
     foreign key (utente) references utente (email) on update cascade,
     foreign key (pagamento) references pagamento (id_transazione) on update cascade,
@@ -227,3 +227,35 @@ values ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 2, 53.47),
        ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 14, 7.87),
        ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 15, 12.5),
        ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 16, 12.5);
+
+
+# I titoli e le date delle esposizioni tematiche che sono state tenute dal 1 gennaio al 31 dicembre di un determinato anno.
+
+select titolo, data_inizio, data_fine
+from evento
+where tipo = 'ESPOSIZIONE'
+  and year(evento.data_inizio) = 2020
+  and year(evento.data_fine) = 2020;
+
+# Numero di biglietti emessi (venduti) per una determinata esposizione
+
+select count(b.numero) as 'Biglietti venduti per 100 icone'
+from evento as e,
+     biglietto as b,
+     acquisto as a
+where e.titolo = '100 icone'
+  and e.tipo = 'ESPOSIZIONE'
+  and b.evento = e.id
+  and a.biglietto = b.numero;
+
+# Ricavato della vendita dei biglietti per una determinata esposizione
+
+select sum(a.importo_pagato) as 'Ricavato della vendita dei biglietti'
+from evento as e,
+     acquisto as a,
+     biglietto as b
+where e.titolo = '100 icone'
+  and e.tipo = 'ESPOSIZIONE'
+  and b.evento = e.id
+  and a.biglietto = b.numero;
+
