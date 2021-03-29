@@ -109,7 +109,69 @@ create table acquisto
 
 
 ## INSERT
-INSERT INTO utente
+## INSERT
+insert into evento
+values ('Stravaganza degli anni 80', '2021-01-14', '2021-05-21', 200, 10.5, 'VISITA'),
+	   ('Le avanguardie', '2021-03-21', '2021-08-26', 250, 13.5, 'VISITA'),
+	   ("L'evoluzione del menswear", '2020-09-06', '2021-01-15', 175, 12.5, 'VISITA'),
+	   ('100 icone', '2020-08-14', '2021-02-25', 300, 15, 'ESPOSIZIONE'),
+	   ('Martin Margiela - un rivoluzionario', '2020-11-24', '2021-04-25', 200, 12.5, 'ESPOSIZIONE'),
+	   ("Le influenze dell'Hip Hop", '2020-11-07', '2021-05-23', 200, 10.5, 'VISITA'),
+	   ('Una sfilata nel passato', '2020-03-24', '2020-09-05', 250, 13, 'ESPOSIZIONE');
+	   
+	   
+insert into categoria
+values ('Bambino (-12)', 'Carta Identità', 20),
+	   ('Anziano (+65)', 'Carta Identità', 25),
+	   ('Studente', 'Carta Universitaria', 15);
+	   
+	   
+insert into biglietto
+values ('2021-04-23', 2, 1),
+	   ('2021-06-14', 3, 2),
+	   ('2021-01-15', 3, 4),
+	   ('2021-02-16', 2, 5),
+	   ('2020-11-21', 2, 3),
+	   ('2021-02-23', 3, 6),
+	   ('2020-05-12', NULL, 7),
+	   ('2021-06-09', NULL, 2),
+	   ('2021-06-09', 1, 2),
+	   ('2021-01-23', 2, 4),
+	   ('2021-02-14', NULL, 5),
+	   ('2021-03-17', NULL, 1),
+	   ('2021-03-17', 1, 1),
+	   ('2021-03-17', 2, 1),
+	   ('2020-12-16', NULL, 3),
+	   ('2020-12-16', NULL, 3);
+	   
+	 
+insert into articolo_aggiuntivo
+values (30, 'Cappello New Era Logo', 'ACCESSORIO'),
+	   (7.5, 'Tote Bag', 'ACCESSORIO'),
+	   (24, 'Maglietta Logo', 'ACCESSORIO'),
+	   (15, 'Tazza Since 1993', 'ACCESSORIO'),
+	   (75, 'Maglia x Comme de Garcons', 'ACCESSORIO'),
+	   (30, 'Visita Guidata', 'SERVIZIO'),
+	   (10, 'Visita Guidata Cuffia', 'SERVIZIO'),
+	   (12, 'Visita Guidata Cuffia Multilingua', 'SERVIZIO');
+	   
+	   
+insert into associazione
+values (1, 1),
+	   (3, 2),
+	   (9, 6),
+	   (5, 3),
+	   (5, 1),
+	   (2, 8),
+	   (2, 1),
+	   (6, 5),
+	   (7, 7),
+	   (4, 1),
+	   (4, 5),
+	   (4, 2);
+	   
+
+insert into utente
 values ('nico53@example.org', '$2b$12$02dW.34ymSC2cfDydkrYre4J6WwvdolQQCGvWn5qqDq4UmuaLoTQu', 'Sebastiano', 'Pulci',
         '+39285810810', 'Incrocio Ferdinando', '16527', '9', 'Settimo Loretta sardo', 'PT'),
        ('matteotticesare@example.net', '$2b$12$DovV.TkdJZAr1i32HoeyFu/1dkWAQ4s/NCAE9gwdz2Uw0NUnd5hI.', 'Adamo',
@@ -130,18 +192,41 @@ values ('nico53@example.org', '$2b$12$02dW.34ymSC2cfDydkrYre4J6WwvdolQQCGvWn5qqD
         'Ficino', '+39117701354', 'Strada Tina', '50386', '858', 'Salvi veneto', 'BT'),
        ('dbenussi@example.net', '$2b$12$vZF4PAZWD1IueIcITL6W0eHSbxes82AP1kxPYU9ZJhx2f87irwMyW', 'Enrico', 'Calvo',
         '+39846760143', 'Borgo Gino', '28179', '02', 'Bembo ligure', 'FR');
+       ('gennaro76@example.org', '$2b$12$qkSLMw7cNjyEqgYInRwbcGjGQLcfGksrPU4C2kyrDbrOkrJbKzMt9', 'Riccardo', 'Rossi',
+        '+3978926297', 'Marco Polo', '14897', '2', 'Cissone', 'CN'), 
 
-INSERT INTO pagamento
-values ('df47973f-8cb7-11eb-95a6-c8b29b8908ae', 1.5, '2020-01-18 16:15:48'),
-       ('df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 1.9, '2020-12-30 15:33:05'),
-       ('df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 1.69, '2020-10-27 12:23:56'),
-       ('df47e5a9-8cb7-11eb-87b9-c8b29b8908ae', 1.99, '2020-11-29 19:41:35'),
-       ('df47e5aa-8cb7-11eb-a543-c8b29b8908ae', 1.77, '2020-09-01 02:06:21'),
-       ('df47e5ab-8cb7-11eb-b2e8-c8b29b8908ae', 1.87, '2020-06-23 08:31:29'),
-       ('df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 1.71, '2020-10-11 21:14:13'),
-       ('df47e5ad-8cb7-11eb-82cf-c8b29b8908ae', 1.83, '2020-09-13 04:50:19'),
-       ('df480c02-8cb7-11eb-9975-c8b29b8908ae', 1.55, '2020-11-24 04:34:28'),
-       ('df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 1.86, '2020-11-23 09:00:31');
+
+insert into pagamento
+values ('df47973f-8cb7-11eb-95a6-c8b29b8908ae', 73.72, '2020-11-18 16:15:48'),
+       ('df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 37.87, '2021-02-15 15:33:05'),
+       ('df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 122.25, '2021-01-14 12:23:56'),
+       ('df47e5a9-8cb7-11eb-87b9-c8b29b8908ae', 63.37, '2020-09-19 19:41:35'),
+       ('df47e5aa-8cb7-11eb-a543-c8b29b8908ae', 38.92, '2021-01-01 02:06:21'),
+       ('df47e5ab-8cb7-11eb-b2e8-c8b29b8908ae', 23, '2020-04-23 08:31:29'),
+       ('df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 54.3, '2021-05-11 21:14:13'),
+       ('df47e5ad-8cb7-11eb-82cf-c8b29b8908ae', 11.25, '2020-11-13 04:50:19'),
+       ('df480c02-8cb7-11eb-9975-c8b29b8908ae', 12.5, '2021-01-24 04:34:28'),
+       ('df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 26.77, '2021-02-23 09:00:31'),
+       ('df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 25, '2020-11-23 09:00:31');
+       
+       
+insert into acquisto
+values ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 2),   
+	   ('nico53@example.org', 'df47973f-8cb7-11eb-95a6-c8b29b8908ae', 3),
+	   ('matteotticesare@example.net', 'df47e5a7-8cb7-11eb-bd36-c8b29b8908ae', 1),
+	   ('guido38@example.com', 'df47e5a8-8cb7-11eb-900e-c8b29b8908ae', 4),
+	   ('ottaviobresciani@example.com', 'df47e5a9-8cb7-11eb-87b9-c8b29b8908ae', 5),
+	   ('ezito@example.net', 'df47e5aa-8cb7-11eb-a543-c8b29b8908ae', 6),
+	   ('tbriccialdi@example.com', 'df47e5ab-8cb7-11eb-b2e8-c8b29b8908ae', 7),
+	   ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 8),
+	   ('fulvio61@example.org', 'df47e5ac-8cb7-11eb-9925-c8b29b8908ae', 9),
+	   ('antonina84@example.org', 'df47e5ad-8cb7-11eb-82cf-c8b29b8908ae', 10),
+	   ('fornaciaricristina@example.com', 'df480c02-8cb7-11eb-9975-c8b29b8908ae', 11),
+	   ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 12),
+	   ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 13),
+	   ('dbenussi@example.net', 'df480c03-8cb7-11eb-8fb4-c8b29b8908ae', 14),
+	   ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 15),
+	   ('gennaro76@example.org', 'df480c03-8cb7-11eb-u6c9-c8b29b8908ae', 16),
                                    
                                    
                                    
