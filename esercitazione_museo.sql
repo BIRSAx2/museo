@@ -1,21 +1,6 @@
 create database if not exists esercitazione_museo;
 use esercitazione_museo;
 
-drop table if exists acquisto;
-
-drop table if exists biglietto;
-
-drop table if exists categoria;
-
-drop table if exists evento;
-
-drop table if exists pagamento;
-
-drop table if exists utente;
-drop table if exists articolo_aggiuntivo;
-
-
-
 create table evento
 (
     id               int auto_increment,
@@ -108,8 +93,7 @@ create table acquisto
 );
 
 
-## INSERT
-## INSERT
+## Dati fittizi per la base di dati
 insert into evento (titolo, data_inizio, data_fine, numero_biglietti, tariffa, tipo)
 values ('Stravaganza degli anni 80', '2021-01-14', '2021-05-21', 200, 10.5, 'VISITA'),
        ('Le avanguardie', '2021-03-21', '2021-08-26', 250, 13.5, 'VISITA'),
