@@ -76,8 +76,8 @@ create table associazione
     numero              int,
     articolo_aggiuntivo int,
     primary key (numero, articolo_aggiuntivo),
-    foreign key (numero) references biglietto (numero),
-    foreign key (articolo_aggiuntivo) references articolo_aggiuntivo (id)
+    foreign key (numero) references biglietto (numero) on update cascade,
+    foreign key (articolo_aggiuntivo) references articolo_aggiuntivo (id)  on update cascade
 );
 
 create table acquisto
