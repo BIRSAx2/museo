@@ -39,7 +39,7 @@ create table biglietto
 create table articolo_aggiuntivo
 (
     id          int auto_increment,
-    costo       float,
+    costo       decimal(10, 2),
     descrizione varchar(255),
     tipo        varchar(20) check (tipo in ('ACCESSORIO', 'SERVIZIO')),
     primary key (id)
